@@ -277,14 +277,17 @@ services:
         - ${NGINX_SSL_PATH}:/etc/nginx/ssl
       environment:
         - VIRTUAL_HOST=${API_DOMAIN}
-      ports:
-        - "${NGINX_HOST_HTTP_PORT}:80"
-        - "${NGINX_HOST_HTTPS_PORT}:443"
+#      ports:
+#        - "${NGINX_HOST_HTTP_PORT}:80"
+#        - "${NGINX_HOST_HTTPS_PORT}:443"
       depends_on:
         - php-fpm
       networks:
         - frontend
         - backend
+      labels:
+        - traefik.frontend.rule=Host:api.artificiumtech.com
+        - traefik.port=80
 
 ### Dockergen #########################################
     dockergen:
@@ -316,6 +319,24 @@ services:
         - "${MYSQL_PORT}:3306"
       networks:
         - backend
+
+  ### TRAEFIK #########################################
+    traefik:
+      build:
+        context: ./traefik
+      command: --docker
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+      ports:
+        - "${TRAEFIK_HOST_HTTP_PORT}:80"
+        - "${TRAEFIK_HOST_HTTPS_PORT}:443"
+      networks:
+        - frontend
+        - backend
+      labels:
+        - traefik.backend=traefik
+        - traefik.frontend.rule=Host:monitor.localhost
+        - traefik.port=8080
 
 ### Certbot #########################################
     certbot:
