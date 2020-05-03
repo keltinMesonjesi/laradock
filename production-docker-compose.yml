@@ -296,7 +296,6 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
     networks:
-      - frontend
       - backend
 
   ### Whoami #########################################
@@ -306,7 +305,6 @@ services:
       - VIRTUAL_HOST=whoami.local
     networks:
       - frontend
-      - backend
 
   ### MySQL ################################################
   mysql:
