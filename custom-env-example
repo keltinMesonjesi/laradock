@@ -266,6 +266,7 @@ NGINX_SITES_PATH=./nginx/sites/
 NGINX_PHP_UPSTREAM_CONTAINER=php-fpm
 NGINX_PHP_UPSTREAM_PORT=9000
 NGINX_SSL_PATH=./nginx/ssl/
+API_DOMAIN = api.domain.com
 
 ### MYSQL #################################################
 
@@ -279,3 +280,7 @@ MYSQL_ENTRYPOINT_INITDB=./mysql/docker-entrypoint-initdb.d
 
 ### DOCKERREGISTRY ###############################################
 DOCKER_REGISTRY_PORT=5000
+
+### CERTBOT ###############################################
+CERTBOT_CN=fake.domain.com
+CERTBOT_EMAIL=fake.email@gmail.com
