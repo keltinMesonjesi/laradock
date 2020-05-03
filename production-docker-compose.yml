@@ -275,6 +275,8 @@ services:
       - ${NGINX_HOST_LOG_PATH}:/var/log/nginx
       - ${NGINX_SITES_PATH}:/etc/nginx/sites-available
       - ${NGINX_SSL_PATH}:/etc/nginx/ssl
+    environment:
+      - VIRTUAL_HOST:api.artificiumtech.com
     depends_on:
       - php-fpm
     networks:
