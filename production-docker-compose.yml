@@ -281,7 +281,6 @@ services:
       - php-fpm
     networks:
       - frontend
-      - backend
 
   ### Dockergen #########################################
   dockergen:
@@ -296,7 +295,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./nginx/nginx.tmpl:/etc/docker-gen/templates/nginx.tmpl
     networks:
-      - backend
+      - frontend
 
   ### Whoami #########################################
   whoami:
